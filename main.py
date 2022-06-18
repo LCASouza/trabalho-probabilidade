@@ -13,10 +13,10 @@ from Layout import Layout
 
 
 if __name__ == '__main__':
-    tabela_acidentes_2012 = data.csv_file_reader("arquivos/datatran2007utf8.csv")
-    tabela_acidentes_2013 = data.csv_file_reader("arquivos/datatran2008utf8.csv")
-    tabela_acidentes_2014 = data.csv_file_reader("arquivos/datatran2009utf8.csv")
-    tabela_acidentes_2015 = data.csv_file_reader("arquivos/datatran2010utf8.csv")
+    tabela_acidentes_2012 = data.csv_file_reader("arquivos/datatran2012utf8.csv")
+    tabela_acidentes_2013 = data.csv_file_reader("arquivos/datatran2013utf8.csv")
+    tabela_acidentes_2014 = data.csv_file_reader("arquivos/datatran2014utf8.csv")
+    tabela_acidentes_2015 = data.csv_file_reader("arquivos/datatran2015utf8.csv")
 
     dias_semana = data.get_dia_semana_int(data.get_dia_semana(tabela_acidentes_2012))
 
