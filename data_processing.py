@@ -95,7 +95,6 @@ def csv_file_reader(arquivo):
     tabela = pd.read_csv(arquivo, sep=";")
     return tabela
 
-
 def csv_table_print(tabela, coluna):
     """
         Método para imprimir uma coluna da tabela.
