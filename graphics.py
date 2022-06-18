@@ -9,9 +9,11 @@
 
 """ importações """
 import matplotlib.pyplot as plt
+from pandas import DataFrame
+from Layout import Layout
 
 
-def mostrar_histograma_com_dataframe(tabela, coluna, intervalo, layout):
+def mostrar_histograma_com_dataframe(tabela: DataFrame, coluna: str, intervalo: int, layout: Layout):
     """
     Método para plotar um histograma usando uma tabela.
 
@@ -36,7 +38,7 @@ def mostrar_histograma_com_dataframe(tabela, coluna, intervalo, layout):
     plt.show()
 
 
-def mostrar_histograma_com_list(lista, num_barras, layout):
+def mostrar_histograma_com_list(lista: list, num_barras: int, layout: Layout):
     """
     Método para plotar um histograma usando uma lista.
 
@@ -58,7 +60,7 @@ def mostrar_histograma_com_list(lista, num_barras, layout):
     plt.show()
 
 
-def mostrar_boxplot(tabela, colunas):
+def mostrar_boxplot(tabela: DataFrame, colunas: str):
     """
     Método para plotar um boxplot.
 

@@ -53,3 +53,5 @@ if __name__ == '__main__':
 
     layoutChange(layout, 'Ocorrências de acidentes durante os dias da semana', 'quantidade de mortos', 'quantidade de ocorrências', 10, 8, 15, 0.7)
     gph.mostrar_histograma_com_dataframe(tabela_acidentes, "mortos", 20, layout)
+
+    gph.mostrar_boxplot(tabela_acidentes, "feridos_graves")
