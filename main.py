@@ -18,19 +18,7 @@ if __name__ == '__main__':
     tabela_acidentes_2009 = data.csv_file_reader("arquivos/datatran2009utf8.csv")
     tabela_acidentes_2010 = data.csv_file_reader("arquivos/datatran2010utf8.csv")
 
-    #gph.mostrar_histograma(tabela_acidentes_2007, "mortos", 20)
-
-    #print("Total de óbitos em 2007 = " + str(data.get_total_obitos(tabela_acidentes_2007)))
-
-    #print(data.get_pessoas_envolvidas(tabela_acidentes_2007))
-
-    #gph.mostrar_histograma(tabela_acidentes_2007, "pessoas", 50)
-
-    #gph.mostrar_boxplot(tabela_acidentes_2007, "mortos")
-
-    #data.get_dia_semana_int(data.get_dia_semana(tabela_acidentes_2007))
-
-    dias_semana = data.get_dia_semana_int(data.get_dia_semana(tabela_acidentes_2007))
+    dias_semana = data.get_dia_semana_int(data.get_dia_semana(tabela_acidentes_2010))
 
     layout = Layout()
     layout.titulo = "Ocorrências de acidentes durante os dias da semana"
@@ -39,5 +27,6 @@ if __name__ == '__main__':
     layout.axis_xy_titulo_size = 10
     layout.label_size = 8
     layout.titulo_size = 15
+    layout.barras_size = 0.9
 
-    gph.mostrar_histograma_com_list(dias_semana, 7, 0.9, layout)
+    gph.mostrar_histograma_com_list(dias_semana, 7, layout)

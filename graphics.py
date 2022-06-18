@@ -36,7 +36,7 @@ def mostrar_histograma_com_dataframe(tabela, coluna, num_colunas, layout):
     plt.show()
 
 
-def mostrar_histograma_com_list(lista, num_barras, tam, layout):
+def mostrar_histograma_com_list(lista, num_barras, layout):
     """
     Método para plotar um histograma usando uma lista.
 
@@ -47,13 +47,10 @@ def mostrar_histograma_com_list(lista, num_barras, tam, layout):
         int num_barras:
         especifica a quantidade de barras do histograma.
 
-        int tam:
-        especifica o tamanho relativo das barras.
-
         Layout Layout:
         contém os parâmetros para estilização do histograma.
     """
-    plt.hist(lista, num_barras, rwidth=tam)
+    plt.hist(lista, num_barras, rwidth=layout.barras_size)
     plt.title(layout.titulo, fontsize=layout.titulo_size)
     plt.xlabel(layout.axis_x_titulo, fontsize=layout.axis_xy_titulo_size)
     plt.ylabel(layout.axis_y_titulo, fontsize=layout.axis_xy_titulo_size)
