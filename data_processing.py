@@ -6,9 +6,9 @@
     ARQUIVO: data_processing.py
         fornece tratamento para a base de dados
 
-    Info:
-    Base de dados disponível no diretório "arquivos/"
-    Arquivos de dados devem estar no formato CSV UTF-8
+    INFO:
+    Base de dados disponível no diretório "arquivos".
+    Arquivos de dados devem estar no formato CSV UTF-8.
 
 """
 
@@ -19,9 +19,11 @@ from datetime import datetime
 
 def get_num_obitos(tabela):
     """
-        Método para obter a quantidade de óbitos da tabela.
-        Recebe como parâmetro:
-            DataFrame tabela -> tabela que possui os dados necessários.
+    Método para obter a quantidade de óbitos da tabela.
+
+    Recebe como parâmetro:
+        DataFrame tabela:
+        tabela que possui os dados necessários.
     """
     obitos = []
     for linha in tabela["mortos"]:
@@ -31,18 +33,22 @@ def get_num_obitos(tabela):
 
 def get_total_obitos(tabela):
     """
-        Método para obter a quantidade total de óbitos.
-        Recebe como parâmetro:
-            DataFrame tabela -> tabela que possui os dados necessários.
+    Método para obter a quantidade total de óbitos.
+
+    Recebe como parâmetro:
+        DataFrame tabela:
+        tabela que possui os dados necessários.
     """
     return sum(get_num_obitos(tabela))
 
 
 def get_data(tabela):
     """
-        Método para obter as datas da tabela.
-        Recebe como parâmetro:
-            DataFrame tabela -> tabela que possui os dados necessários.
+    Método para obter as datas da tabela.
+
+    Recebe como parâmetro:
+        DataFrame tabela:
+        tabela que possui os dados necessários.
     """
     data = []
     for linha in tabela["data_inversa"]:
@@ -52,9 +58,10 @@ def get_data(tabela):
 
 def get_dia_semana(tabela):
     """
-        Método para obter os dias da semana da tabela.
-        Recebe como parâmetro:
-            DataFrame tabela -> tabela que possui os dados necessários.
+    Método para obter os dias da semana da tabela.
+
+    Recebe como parâmetro:
+        DataFrame tabela: tabela que possui os dados necessários.
     """
     dia_semana = []
     for linha in tabela["dia_semana"]:
@@ -62,11 +69,40 @@ def get_dia_semana(tabela):
     return dia_semana
 
 
+def get_dia_semana_int(dias):
+    """
+    Método para obter a contagem dos dias da semana da tabela.
+
+    Recebe como parâmetro:
+        list dias:
+        lista com os dias da semana obtidos da tabela.
+    """
+    dias_semana_int = []
+    for dia in dias:
+        if dia == "Domingo":
+            dias_semana_int.append(0)
+        if dia == "Segunda":
+            dias_semana_int.append(1)
+        if dia == "Terça":
+            dias_semana_int.append(2)
+        if dia == "Quarta":
+            dias_semana_int.append(3)
+        if dia == "Quinta":
+            dias_semana_int.append(4)
+        if dia == "Sexta":
+            dias_semana_int.append(5)
+        else:
+            dias_semana_int.append(6)
+    return dias_semana_int
+
+
 def get_horario(tabela):
     """
-        Método para obter os horários da tabela.
-        Recebe como parâmetro:
-            DataFrame tabela -> tabela que possui os dados necessários.
+    Método para obter os horários da tabela.
+
+    Recebe como parâmetro:
+        DataFrame tabel:
+        tabela que possui os dados necessários.
     """
     horario = []
     for linha in tabela["horario"]:
@@ -76,9 +112,11 @@ def get_horario(tabela):
 
 def get_pessoas_envolvidas(tabela):
     """
-            Método para obter o número de pessoas envolvidas da tabela.
-            Recebe como parâmetro:
-                DataFrame tabela -> tabela que possui os dados necessários.
+    Método para obter o número de pessoas envolvidas da tabela.
+
+    Recebe como parâmetro:
+        DataFrame tabela:
+        tabela que possui os dados necessários.
     """
     pessoas = []
     for linha in tabela["pessoas"]:
@@ -88,18 +126,24 @@ def get_pessoas_envolvidas(tabela):
 
 def csv_file_reader(arquivo):
     """
-        Método para ler um arquivo csv.
-        Recebe como parâmetro:
-            str arquivo -> endereço/nome do arquivo que será lido.
+    Método para ler um arquivo csv.
+
+    Recebe como parâmetro:
+        str arquivo:
+        endereço/nome do arquivo que será lido.
     """
     tabela = pd.read_csv(arquivo, sep=";")
     return tabela
 
 def csv_table_print(tabela, coluna):
     """
-        Método para imprimir uma coluna da tabela.
-        Recebe como parâmetros:
-            DataFrame tabela -> tabela que possui os dados para imprimir.
-            str coluna -> especifica a coluna que será impressa.
+    Método para imprimir uma coluna da tabela.
+
+    Recebe como parâmetros:
+        DataFrame tabela:
+        tabela que possui os dados para imprimir.
+
+        str coluna:
+        especifica a coluna que será impressa.
     """
     print(tabela[coluna])
