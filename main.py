@@ -31,5 +31,4 @@ if __name__ == '__main__':
 
     #print(data.get_pessoas_envolvidas(tabela_acidentes_2007))
 
-    gph.mostrar_histograma(tabela_acidentes_2012, "pessoas", 50)
     gph.mostrar_histograma_com_list(dias_semana, 7, layout)
