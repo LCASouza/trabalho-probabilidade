@@ -7,28 +7,49 @@
 """
 
 """ importações """
+import string
+
+from numpy import double
 import data_processing as data
 import graphics as gph
 from Layout import Layout
 
+def layoutChange(layout: Layout, tituloPrincipal: str, tituloX: str, tituloY: str, tituloXYSize: int, labelSize: int, tituloSize: int, barraSize: float):
+    """
+        layout: Objeto Layout
+
+        tituloPrincipal: Título do Gráfico
+
+        tituloX: Define o título do eixo horizontal
+
+        tituloY: Define o título do eixo vertical
+
+        tituloXYSize: Define o tamanho da fonte dos rótulos dos eixos vertical e horizontal
+
+        labelSize: Define o tamanho dos elementos do gráfico
+
+        tituloSize: Define o tamanho da fonte do título
+
+        barraSize: Define o tamanho da barras do gráfico
+    """
+    layout.titulo = tituloPrincipal
+    layout.axis_x_titulo = tituloX
+    layout.axis_y_titulo = tituloY
+    layout.axis_xy_titulo_size = tituloXYSize
+    layout.label_size = labelSize
+    layout.titulo_size = tituloSize
+    layout.barras_size = barraSize
+
 
 if __name__ == '__main__':
-    tabela_acidentes_2012 = data.csv_file_reader("arquivos/datatran2012utf8.csv")
-    tabela_acidentes_2013 = data.csv_file_reader("arquivos/datatran2013utf8.csv")
-    tabela_acidentes_2014 = data.csv_file_reader("arquivos/datatran2014utf8.csv")
-    tabela_acidentes_2015 = data.csv_file_reader("arquivos/datatran2015utf8.csv")
+    tabela_acidentes = data.csv_file_reader("tabela_acidentes.csv")
 
-    dias_semana = data.get_dia_semana_int(data.get_dia_semana(tabela_acidentes_2012))
+    dias_semana = data.get_dia_semana_int(data.get_dia_semana(tabela_acidentes))
 
     layout = Layout()
-    layout.titulo = "Ocorrências de acidentes durante os dias da semana"
-    layout.axis_x_titulo = "dias da semana"
-    layout.axis_y_titulo = "quantidade de ocorrências"
-    layout.axis_xy_titulo_size = 10
-    layout.label_size = 8
-    layout.titulo_size = 15
-    layout.barras_size = 0.9
 
-    #print(data.get_pessoas_envolvidas(tabela_acidentes_2007))
-
+    layoutChange(layout, 'Ocorrências de acidentes durante os dias da semana', 'dias da semana', 'quantidade de ocorrências', 10, 8, 15, 0.7)
     gph.mostrar_histograma_com_list(dias_semana, 7, layout)
+
+    layoutChange(layout, 'Ocorrências de acidentes durante os dias da semana', 'quantidade de mortos', 'quantidade de ocorrências', 10, 8, 15, 0.7)
+    gph.mostrar_histograma_com_dataframe(tabela_acidentes, "mortos", 20, layout)

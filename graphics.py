@@ -11,7 +11,7 @@
 import matplotlib.pyplot as plt
 
 
-def mostrar_histograma_com_dataframe(tabela, coluna, num_colunas, layout):
+def mostrar_histograma_com_dataframe(tabela, coluna, intervalo, layout):
     """
     Método para plotar um histograma usando uma tabela.
 
@@ -22,13 +22,13 @@ def mostrar_histograma_com_dataframe(tabela, coluna, num_colunas, layout):
         str coluna:
         especifica a coluna que será plotada no histograma.
 
-        int num_colunas:
-        especifica a quantidade de colunas que serão plotadas.
+        int intervalo:
+        intervalo entre as colunas.
 
         Layout Layout:
         contém os parâmetros para estilização do histograma.
     """
-    tabela.hist(column=coluna, bins=num_colunas)
+    tabela.hist(column=coluna, bins=intervalo)
     plt.title(layout.titulo, fontsize=layout.titulo_size)
     plt.xlabel(layout.axis_x_titulo, fontsize=layout.axis_xy_titulo_size)
     plt.ylabel(layout.axis_y_titulo, fontsize=layout.axis_xy_titulo_size)
