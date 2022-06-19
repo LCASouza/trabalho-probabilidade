@@ -8,6 +8,7 @@
 """
 
 import matplotlib.pyplot as plt
+import pandas as pd
 from pandas import DataFrame
 from Layout import Layout
 from scipy.stats import norm
@@ -78,6 +79,14 @@ class Graphics:
         self.tabela.boxplot(column=colunas)
         plt.title(layout.titulo, fontsize=layout.titulo_size)
         plt.tick_params(labelsize=layout.label_size)
+        plt.show()
+
+    def mostrar_grafico_barras(self, data_frame_dias: DataFrame):
+        """
+        Método para plotar um gráfico de barras.
+        """
+        df = pd.DataFrame({'lab': data_frame_dias.keys(), 'val': data_frame_dias.values})
+        df.plot.bar()
         plt.show()
 
     def mostrar_normal(self, dados, media: float, desv_padrao: float):
