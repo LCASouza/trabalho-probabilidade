@@ -1,7 +1,7 @@
 """
     Pontifícia Universidade Católica de Goiás
     Trabalho de Probabilidade e Estatística - MAF1730 C01
-    Análise de Dados - Acidentes nas rodovias federais 2007 - 2018
+    Análise de Dados - Acidentes nas rodovias federais 2012 - 2014
 
     DataProcessing.py
     Classe para tratamento da base de dados
@@ -17,6 +17,13 @@ import pandas as pd
 class DataProcessing:
 
     def __init__(self, arquivo: str):
+        """
+            Construtor: Classe DataProcessing
+
+            Recebe como parâmetro:
+                str arquivo:
+                representa o endereço do arquivo de dados.
+        """
         self.tabela = self.csv_file_reader(arquivo)
 
     def get_num_obitos(self):
@@ -90,7 +97,7 @@ class DataProcessing:
                 dias_semana_int.append(4)
             if dia == "Sexta":
                 dias_semana_int.append(5)
-            else:
+            if dia == "Sábado":
                 dias_semana_int.append(6)
         return dias_semana_int
 

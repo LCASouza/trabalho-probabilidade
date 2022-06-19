@@ -1,7 +1,7 @@
 """
     Pontifícia Universidade Católica de Goiás
     Trabalho de Probabilidade e Estatística - MAF1730 C01
-    Análise de Dados - Acidentes nas rodovias federais 2007 - 2018
+    Análise de Dados - Acidentes nas rodovias federais 2012 - 2014
 
     Graphics.py
     Classe para apresentação dos gráficos
@@ -16,6 +16,13 @@ from scipy.stats import norm
 class Graphics:
 
     def __init__(self, tabela: DataFrame):
+        """
+            Construtor: Classe Graphics
+
+            Recebe como parâmetros:
+                DataFrame tabela:
+                define a tabela de dados para plotagem de gráficos usando DataFrame.
+        """
         self.tabela = tabela
 
     def mostrar_histograma_com_dataframe(self, coluna: str, intervalo_coluna: int, layout: Layout):
