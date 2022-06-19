@@ -3,11 +3,9 @@
     Trabalho de Probabilidade e Estatística - MAF1730 C01
     Análise de Dados - Acidentes nas rodovias federais 2007 - 2018
 
-    ARQUIVO: Layout.py
-        Classe para estilização dos layouts dos gráficos
+    Layout.py
+    Classe para estilização dos layouts dos gráficos
 """
-
-""" importações """
 
 
 class Layout:
