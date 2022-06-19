@@ -25,7 +25,7 @@ class DataProcessing:
                 str arquivo:
                 representa o endereço do arquivo de dados.
         """
-        self.tabela = self.csv_file_reader(arquivo)
+        self.dados = self.csv_file_reader(arquivo)
         self.filtrar_uf_go()
 
     def get_num_obitos(self):
@@ -33,7 +33,7 @@ class DataProcessing:
         Método para obter a quantidade de óbitos da tabela.
         """
         obitos = []
-        for linha in self.tabela["mortos"]:
+        for linha in self.dados["mortos"]:
             obitos.append(linha)
         return obitos
 
@@ -48,7 +48,7 @@ class DataProcessing:
         Método para obter as datas da tabela.
         """
         data = []
-        for linha in self.tabela["data_inversa"]:
+        for linha in self.dados["data_inversa"]:
             data.append(linha)
         return data
 
@@ -56,14 +56,14 @@ class DataProcessing:
         """
         Método para obter a contagem dos dias da semana da tabela.
         """
-        return self.tabela.groupby(by='dia_semana').size()
+        return self.dados.groupby(by='dia_semana').size()
 
     def get_horario(self):
         """
         Método para obter os horários da tabela.
         """
         horario = []
-        for linha in self.tabela["horario"]:
+        for linha in self.dados["horario"]:
             horario.append(linha)
         return horario
 
@@ -72,7 +72,7 @@ class DataProcessing:
         Método para obter o número de pessoas envolvidas da tabela.
         """
         pessoas = []
-        for linha in self.tabela["pessoas"]:
+        for linha in self.dados["pessoas"]:
             pessoas.append(linha)
         return pessoas
 
@@ -81,44 +81,21 @@ class DataProcessing:
         Método para obter as rodovias presentes na tabela.
         """
         rodovia = []
-        for linha in self.tabela["br"]:
+        for linha in self.dados["br"]:
             rodovia.append(linha)
         return rodovia
 
-    def get_causa_acidentes_int(self):
+    def get_causa_acidentes(self):
         """
         Método para obter as principais causas de acidentes da tabela.
         """
-        acidentes = []
-        for linha in self.tabela["causa_acidente"]:
-            if linha == "Velocidade incompatível":
-                acidentes.append(0)
-            if linha == "Falta de atenção":
-                acidentes.append(1)
-            if linha == "Ingestão de álcool":
-                acidentes.append(2)
-            if linha == "Não guardar distância de segurança":
-                acidentes.append(3)
-            if linha == "Desobediência à sinalização":
-                acidentes.append(4)
-            if linha == "Ultrapassagem indevida":
-                acidentes.append(5)
-            if linha == "Animais na Pista":
-                acidentes.append(6)
-            if linha == "Defeito mecânico em veículo":
-                acidentes.append(7)
-            if linha == "Defeito na via":
-                acidentes.append(8)
-            if linha == "Dormindo":
-                acidentes.append(9)
-        return acidentes
+        return self.dados.groupby(by='causa_acidente').size()
 
     def filtrar_uf_go(self):
         """
         Método para filtrar os dados da tabela para obter apenas dados de GO.
         """
-        self.tabela = self.tabela.loc[self.tabela['uf'] == 'GO']
-        self.tabela = DataFrame(self.tabela)
+        self.dados = DataFrame(self.dados.loc[self.dados['uf'] == 'GO'])
 
     def csv_file_reader(self, arquivo: str):
         """
@@ -139,4 +116,4 @@ class DataProcessing:
             str coluna:
             especifica a coluna que será impressa.
         """
-        print(self.tabela[coluna])
+        print(self.dados[coluna])

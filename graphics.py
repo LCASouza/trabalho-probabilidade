@@ -7,6 +7,7 @@
     Classe para apresentação dos gráficos
 """
 
+from this import d
 import matplotlib.pyplot as plt
 import pandas as pd
 from pandas import DataFrame
@@ -16,7 +17,7 @@ from scipy.stats import norm
 
 class Graphics:
 
-    def __init__(self, tabela: DataFrame):
+    def __init__(self, dados: DataFrame):
         """
             Construtor: Classe Graphics
 
@@ -24,7 +25,7 @@ class Graphics:
                 DataFrame tabela:
                 define a tabela de dados para plotagem de gráficos usando DataFrame.
         """
-        self.tabela = tabela
+        self.dados = dados
 
     def mostrar_histograma_com_dataframe(self, coluna: str, intervalo_coluna: int, layout: Layout):
         """
@@ -40,7 +41,7 @@ class Graphics:
             Layout Layout:
             contém os parâmetros para estilização do histograma.
         """
-        self.tabela.hist(column=coluna, bins=intervalo_coluna)
+        self.dados.hist(column=coluna, bins=intervalo_coluna)
         plt.title(layout.titulo, fontsize=layout.titulo_size)
         plt.xlabel(layout.axis_x_titulo, fontsize=layout.axis_xy_titulo_size)
         plt.ylabel(layout.axis_y_titulo, fontsize=layout.axis_xy_titulo_size)
@@ -76,17 +77,31 @@ class Graphics:
             list colunas:
             especifica a(s) coluna(s) que será(ão) plotada(s) no boxplot.
         """
-        self.tabela.boxplot(column=colunas)
+        self.dados.boxplot(column=colunas)
         plt.title(layout.titulo, fontsize=layout.titulo_size)
         plt.tick_params(labelsize=layout.label_size)
         plt.show()
 
-    def mostrar_grafico_barras(self, data_frame_dias: DataFrame):
+    def mostrar_grafico_barras_dias_da_semana(self, dados: DataFrame):
         """
         Método para plotar um gráfico de barras.
         """
-        df = pd.DataFrame({'lab': data_frame_dias.keys(), 'val': data_frame_dias.values})
-        df.plot.bar()
+        dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+        frequencia = [dados[dias[0]], dados[dias[1]], dados[dias[2]], dados[dias[3]], dados[dias[4]], dados[dias[5]], dados[dias[6]]]
+        df = pd.DataFrame({'Dias da semana': dias, 'Frequência': frequencia})
+        df.plot.bar(x='Dias da semana', y='Frequência', rot=0)
+        plt.show()
+
+    def mostrar_grafico_barras_acidentes(self, dados: DataFrame):
+        """
+        Método para plotar um gráfico de barras.
+        """
+        # df = pd.DataFrame({'A':7, 'B':12, 'C':15, 'D':17}, index=['Values'])
+        df = pd.DataFrame({'Tipo de acidentes': dados.keys(), 'Frequência': dados.values})
+        # df.plot.bar(x='Tipo de acidentes', y='Frequência', rot=0)
+        df.plot(kind='bar')
+        plt.legend(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K'], title='Acidentes')
+        # plt.legend(['A', 'B', 'C', 'D'], loc='center left', title='Legend Title')
         plt.show()
 
     def mostrar_normal(self, dados, media: float, desv_padrao: float):
