@@ -41,7 +41,7 @@ class DataProcessing:
         """
         Método para obter a contagem dos dias da semana da tabela.
         """
-        return self.dados.groupby(by='dia_semana').size()
+        return self.dados.groupby(by='dia_semana', sort=False).size()
 
     def get_pessoas_envolvidas(self):
         """

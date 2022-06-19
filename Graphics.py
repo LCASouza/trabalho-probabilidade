@@ -84,24 +84,36 @@ class Graphics:
     def mostrar_grafico_barras_dias_da_semana(self, dados: DataFrame):
         """
         Método para plotar um gráfico de barras.
+
+        Recebe como parâmetro:
+            DataFrame dados:
+            contém os dados que serão plotados no gráfico.
         """
-        dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
-        frequencia = [dados[dias[0]], dados[dias[1]], dados[dias[2]], dados[dias[3]], dados[dias[4]], dados[dias[5]], dados[dias[6]]]
-        df = pd.DataFrame({'Dias da semana': dias, 'Frequência': frequencia})
-        df.plot.bar(x='Dias da semana', y='Frequência', rot=0)
+        parameters = {'xtick.labelsize': 8,
+                      'ytick.labelsize': 10,
+                      'figure.figsize': (8, 6)}
+        plt.rcParams.update(parameters)
+        dados.plot.bar()
+        plt.title("Frequência dos acidentes durante os dias da semana", fontsize=15)
+        plt.ylabel("Ocorrências", fontsize=12)
         plt.show()
 
     def mostrar_grafico_barras_acidentes(self, dados: DataFrame):
         """
         Método para plotar um gráfico de barras.
+
+        Recebe como parâmetro:
+            DataFrame dados:
+            contém os dados que serão plotados no gráfico.
         """
-        # # df = pd.DataFrame({'A':7, 'B':12, 'C':15, 'D':17}, index=['Values'])
-        # df = pd.DataFrame({'Tipo de acidentes': dados.keys(), 'Frequência': dados.values})
-        # # df.plot.bar(x='Tipo de acidentes', y='Frequência', rot=0)
-        # df.plot(kind='bar')
-        # plt.legend(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K'], title='Acidentes')
-        # # plt.legend(['A', 'B', 'C', 'D'], loc='center left', title='Legend Title')
-        # plt.show()
+        parameters = {'xtick.labelsize': 8,
+                      'ytick.labelsize': 10,
+                      'figure.figsize': (8, 6)}
+        plt.rcParams.update(parameters)
+        dados.plot.bar()
+        plt.title("Principais causas de acidentes nas rodovias (GO)", fontsize=15)
+        plt.ylabel("Ocorrências", fontsize=12)
+        plt.show()
 
     def mostrar_normal(self, dados, media: float, desv_padrao: float):
         """
