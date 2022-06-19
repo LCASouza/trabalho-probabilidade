@@ -7,7 +7,6 @@
     Classe para apresentação dos gráficos
 """
 
-from this import d
 import matplotlib.pyplot as plt
 import pandas as pd
 from pandas import DataFrame
@@ -96,13 +95,13 @@ class Graphics:
         """
         Método para plotar um gráfico de barras.
         """
-        # df = pd.DataFrame({'A':7, 'B':12, 'C':15, 'D':17}, index=['Values'])
-        df = pd.DataFrame({'Tipo de acidentes': dados.keys(), 'Frequência': dados.values})
-        # df.plot.bar(x='Tipo de acidentes', y='Frequência', rot=0)
-        df.plot(kind='bar')
-        plt.legend(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K'], title='Acidentes')
-        # plt.legend(['A', 'B', 'C', 'D'], loc='center left', title='Legend Title')
-        plt.show()
+        # # df = pd.DataFrame({'A':7, 'B':12, 'C':15, 'D':17}, index=['Values'])
+        # df = pd.DataFrame({'Tipo de acidentes': dados.keys(), 'Frequência': dados.values})
+        # # df.plot.bar(x='Tipo de acidentes', y='Frequência', rot=0)
+        # df.plot(kind='bar')
+        # plt.legend(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K'], title='Acidentes')
+        # # plt.legend(['A', 'B', 'C', 'D'], loc='center left', title='Legend Title')
+        # plt.show()
 
     def mostrar_normal(self, dados, media: float, desv_padrao: float):
         """

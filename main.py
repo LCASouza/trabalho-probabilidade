@@ -7,7 +7,7 @@
 """
 import statistics
 import numpy as np
-from graphics import Graphics
+from Graphics import Graphics
 from DataProcessing import DataProcessing
 from Layout import Layout
 
