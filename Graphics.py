@@ -89,14 +89,14 @@ class Graphics:
             DataFrame dados:
             contém os dados que serão plotados no gráfico.
         """
-        parameters = {'xtick.labelsize': 8,
-                      'ytick.labelsize': 10,
-                      'figure.figsize': (8, 6)}
-        plt.rcParams.update(parameters)
-        dados.plot.bar()
-        plt.title("Frequência dos acidentes durante os dias da semana", fontsize=15)
-        plt.ylabel("Ocorrências", fontsize=12)
-        plt.show()
+        # parameters = {'xtick.labelsize': 8,
+        #               'ytick.labelsize': 10,
+        #               'figure.figsize': (8, 6)}
+        # plt.rcParams.update(parameters)
+        # dados.plot.bar()
+        # plt.title("Frequência dos acidentes durante os dias da semana", fontsize=15)
+        # plt.ylabel("Ocorrências", fontsize=12)
+        # plt.show()
 
     def mostrar_grafico_barras_acidentes(self, dados: DataFrame):
         """
@@ -106,13 +106,18 @@ class Graphics:
             DataFrame dados:
             contém os dados que serão plotados no gráfico.
         """
-        parameters = {'xtick.labelsize': 8,
-                      'ytick.labelsize': 10,
-                      'figure.figsize': (8, 6)}
-        plt.rcParams.update(parameters)
-        dados.plot.bar()
-        plt.title("Principais causas de acidentes nas rodovias (GO)", fontsize=15)
-        plt.ylabel("Ocorrências", fontsize=12)
+
+        alfabeto=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O']
+        legenda=[]
+        for causaAcidente, frequencia in dados.iteritems():
+            letra = alfabeto.pop(0)
+            plt.bar(letra , frequencia)
+            legenda.append(letra +' - '+ causaAcidente)
+
+        plt.xlabel('Tipo de acidentes')
+        plt.ylabel('Frequência')
+        plt.title('Gráfico de Acidentes')
+        plt.legend(legenda)
         plt.show()
 
     def mostrar_normal(self, dados, media: float, desv_padrao: float):
