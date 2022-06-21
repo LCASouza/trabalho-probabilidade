@@ -28,18 +28,9 @@ class DataProcessing:
         self.dados = self.csv_file_reader(arquivo)
         self.filtrar_uf_go()
 
-    def get_num_obitos(self):
-        """
-        Método para obter a quantidade de óbitos da tabela.
-        """
-        obitos = []
-        for linha in self.dados["mortos"]:
-            obitos.append(linha)
-        return obitos
-
     def get_dia_semana(self):
         """
-        Método para obter a contagem dos dias da semana da tabela.
+        Método para obter a quantidade de acidentes nos dias da semana.
         """
         return self.dados.groupby(by='dia_semana', sort=False).size()
 
@@ -47,11 +38,6 @@ class DataProcessing:
         """
         Método para obter a quantidade de vítimas da tabela.
         """
-        # d = {'Feridos graves': [self.dados['feridos_graves'].sum()],
-        #      'Feridos leves': [self.dados['feridos_leves'].sum()],
-        #      'Óbitos': [self.dados['mortos'].sum()],
-        #      'Ilesos': [self.dados['ilesos'].sum()]}
-
         d = {'Vítimas': [self.dados['feridos_graves'].sum(),
                          self.dados['feridos_leves'].sum(),
                          self.dados['mortos'].sum(),

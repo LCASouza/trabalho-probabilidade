@@ -93,9 +93,10 @@ class Graphics:
                       'ytick.labelsize': 10,
                       'figure.figsize': (8, 6)}
         plt.rcParams.update(parameters)
-        dados.plot.bar()
+        dados.plot.bar(rot=0, color='#175FFC')
         plt.title("Frequência dos acidentes durante os dias da semana", fontsize=15)
         plt.ylabel("Ocorrências", fontsize=12)
+        plt.xlabel("Dias da semana", fontsize=12)
         plt.show()
 
     def mostrar_grafico_barras_acidentes(self, dados: DataFrame):
@@ -108,11 +109,20 @@ class Graphics:
         """
         parameters = {'xtick.labelsize': 8,
                       'ytick.labelsize': 10,
-                      'figure.figsize': (8, 6)}
+                      'figure.figsize': (10, 6)}
         plt.rcParams.update(parameters)
-        dados.plot.bar()
-        plt.title("Principais causas de acidentes nas rodovias (GO)", fontsize=15)
-        plt.ylabel("Ocorrências", fontsize=12)
+
+        alfabeto=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O']
+        legenda=[]
+        for causaAcidente, frequencia in dados.iteritems():
+            letra = alfabeto.pop(0)
+            plt.bar(letra , frequencia)
+            legenda.append(letra + ' - ' + str(causaAcidente))
+
+        plt.xlabel('Tipos de acidentes', fontsize=12)
+        plt.ylabel('Frequência', fontsize=12)
+        plt.title('Principais causas de acidentes nas rodovias federais (GO)')
+        plt.legend(legenda)
         plt.show()
 
     def mostrar_grafico_vitimas_acidentes(self, dados: DataFrame):
