@@ -17,8 +17,7 @@ if __name__ == '__main__':
     layout = Layout()
     graficos = Graphics(tabela.dados)
 
-    diasSemana = tabela.get_dia_semana()
-    acidentes = tabela.get_causa_acidentes()
+    # graficos.mostrar_grafico_barras_dias_da_semana(tabela.get_dia_semana())
+    # graficos.mostrar_grafico_barras_acidentes(tabela.get_causa_acidentes())
 
-    graficos.mostrar_grafico_barras_dias_da_semana(diasSemana)
-    graficos.mostrar_grafico_barras_acidentes(acidentes)
+    graficos.mostrar_grafico_vitimas_acidentes(tabela.get_vitimas_acidentes())

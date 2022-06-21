@@ -115,6 +115,23 @@ class Graphics:
         plt.ylabel("Ocorrências", fontsize=12)
         plt.show()
 
+    def mostrar_grafico_vitimas_acidentes(self, dados: DataFrame):
+        """
+        Método para plotar um gráfico de barras.
+
+        Recebe como parâmetro:
+            DataFrame dados:
+            contém os dados que serão plotados no gráfico.
+        """
+        parameters = {'xtick.labelsize': 10,
+                      'ytick.labelsize': 10,
+                      'figure.figsize': (8, 6)}
+        plt.rcParams.update(parameters)
+        dados.plot.bar(rot=0, color='#06471F')
+        plt.title("Vítimas dos acidentes nas rodovias federais (GO)", fontsize=15)
+        plt.ylabel("Quantidade", fontsize=12)
+        plt.show()
+
     def mostrar_normal(self, dados, media: float, desv_padrao: float):
         """
             Método para plotar uma curva normal.

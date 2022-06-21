@@ -43,14 +43,21 @@ class DataProcessing:
         """
         return self.dados.groupby(by='dia_semana', sort=False).size()
 
-    def get_pessoas_envolvidas(self):
+    def get_vitimas_acidentes(self):
         """
-        Método para obter o número de pessoas envolvidas da tabela.
+        Método para obter a quantidade de vítimas da tabela.
         """
-        pessoas = []
-        for linha in self.dados["pessoas"]:
-            pessoas.append(linha)
-        return pessoas
+        # d = {'Feridos graves': [self.dados['feridos_graves'].sum()],
+        #      'Feridos leves': [self.dados['feridos_leves'].sum()],
+        #      'Óbitos': [self.dados['mortos'].sum()],
+        #      'Ilesos': [self.dados['ilesos'].sum()]}
+
+        d = {'Vítimas': [self.dados['feridos_graves'].sum(),
+                         self.dados['feridos_leves'].sum(),
+                         self.dados['mortos'].sum(),
+                         self.dados['ilesos'].sum()]}
+
+        return pd.DataFrame(data=d, index=['Feridos graves', 'Feridos leves', 'Óbitos', 'Ilesos'])
 
     def get_causa_acidentes(self):
         """
