@@ -34,16 +34,25 @@ class DataProcessing:
         """
         return self.dados.groupby(by='dia_semana', sort=False).size()
 
+    def get_causas_acidentes_sum_vitimas(self):
+        """
+        Método para filtrar as causas de acidentes e somar a quantidade de mortos, feridos, e ilesos
+        em cada causa obtida.
+        """
+        tabela_dados = self.dados.filter(['causa_acidente', 'mortos', 'feridos_graves', 'feridos_leves', 'ilesos'])
+        tabela_dados = tabela_dados.groupby(by='causa_acidente', sort=False).sum()
+        return tabela_dados
+
     def get_vitimas_acidentes(self):
         """
         Método para obter a quantidade de vítimas da tabela.
         """
-        d = {'Vítimas': [self.dados['feridos_graves'].sum(),
+        dados_vitimas = {'Vítimas': [self.dados['feridos_graves'].sum(),
                          self.dados['feridos_leves'].sum(),
                          self.dados['mortos'].sum(),
                          self.dados['ilesos'].sum()]}
 
-        return pd.DataFrame(data=d, index=['Feridos graves', 'Feridos leves', 'Óbitos', 'Ilesos'])
+        return pd.DataFrame(data=dados_vitimas, index=['Feridos graves', 'Feridos leves', 'Óbitos', 'Ilesos'])
 
     def get_causa_acidentes(self):
         """
