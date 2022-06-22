@@ -47,27 +47,6 @@ class Graphics:
         plt.tick_params(labelsize=layout.label_size)
         plt.show()
 
-    def mostrar_histograma_com_list(self, lista: list, num_barras: int, layout: Layout):
-        """
-        Método para plotar um histograma usando uma lista.
-
-        Recebe como parâmetros:
-            list lista:
-            lista que possui os dados necessários para plotar o histograma.
-
-            int num_barras:
-            especifica a quantidade de barras do histograma.
-
-            Layout Layout:
-            contém os parâmetros para estilização do histograma.
-        """
-        plt.hist(lista, num_barras, rwidth=layout.barras_size)
-        plt.title(layout.titulo, fontsize=layout.titulo_size)
-        plt.xlabel(layout.axis_x_titulo, fontsize=layout.axis_xy_titulo_size)
-        plt.ylabel(layout.axis_y_titulo, fontsize=layout.axis_xy_titulo_size)
-        plt.tick_params(labelsize=layout.label_size)
-        plt.show()
-
     def mostrar_boxplot(self, colunas: list, layout: Layout):
         """
         Método para plotar um boxplot.
@@ -112,15 +91,15 @@ class Graphics:
                       'figure.figsize': (10, 6)}
         plt.rcParams.update(parameters)
 
-        alfabeto=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O']
-        legenda=[]
-        for causaAcidente, frequencia in dados.iteritems():
+        alfabeto = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
+        legenda = []
+        for causa_acidente, frequencia in dados.iteritems():
             letra = alfabeto.pop(0)
-            plt.bar(letra , frequencia)
-            legenda.append(letra + ' - ' + str(causaAcidente))
+            plt.bar(letra, frequencia)
+            legenda.append(letra + ' - ' + str(causa_acidente))
 
         plt.xlabel('Tipos de acidentes', fontsize=12)
-        plt.ylabel('Frequência', fontsize=12)
+        plt.ylabel('Ocorrências', fontsize=12)
         plt.title('Principais causas de acidentes nas rodovias federais (GO)')
         plt.legend(legenda)
         plt.show()
