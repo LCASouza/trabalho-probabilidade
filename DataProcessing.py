@@ -68,7 +68,6 @@ class DataProcessing:
         Método para obter as principais causas de acidentes da tabela.
         """
         tabela = self.dados.groupby(by='causa_acidente').size()
-        tabela = tabela.drop(['Outras'])
         return tabela.sort_values()
 
     def filtrar_uf_go(self):
