@@ -25,7 +25,7 @@ class DataProcessing:
                 str arquivo:
                 representa o endereço do arquivo de dados.
         """
-        self.dados = self.csv_file_reader(arquivo)
+        self.dados = DataFrame(self.csv_file_reader(arquivo))
         self.filtrar_uf_go()
 
     def get_dia_semana(self):
@@ -39,35 +39,37 @@ class DataProcessing:
         Método para obter os tipos de acidentes.
         """
 
-        return self.dados.groupby(by='tipo_acidente', sort=False).size()
+        tabela = self.dados.groupby(by='tipo_acidente', sort=True).size()
+        return tabela.sort_values()
 
-    def get_causas_acidentes_sum_vitimas(self):
+    def get_soma_vitimas(self, filtroLinha: str, tratamentoDrop=None):
         """
         Método para filtrar as causas de acidentes e somar a quantidade de mortos, feridos, e ilesos
         em cada causa obtida.
         """
-        tabela = self.dados.groupby(by='causa_acidente').sum()
+        tabela = self.dados.groupby(by=filtroLinha).sum()
         tabela = tabela[['ilesos', 'feridos', 'mortos']]
-        tabela = tabela.drop(["Outras"])
-
-        return tabela
+        if tratamentoDrop is not None:
+            tabela = tabela.drop(tratamentoDrop)
+        return tabela.sort_values(['ilesos'])
 
     def get_vitimas_acidentes(self):
         """
         Método para obter a quantidade de vítimas da tabela.
         """
-        dados_vitimas = {'Vítimas': [self.dados['feridos_graves'].sum(),
+        dados_vitimas = {'Vítimas': [self.dados['ilesos'].sum(),
                          self.dados['feridos_leves'].sum(),
-                         self.dados['mortos'].sum(),
-                         self.dados['ilesos'].sum()]}
-
-        return pd.DataFrame(data=dados_vitimas, index=['Feridos graves', 'Feridos leves', 'Óbitos', 'Ilesos'])
+                         self.dados['feridos_graves'].sum(),
+                         self.dados['mortos'].sum()]}
+        return pd.DataFrame(data=dados_vitimas, index=['Ilesos', 'Feridos leves', 'Feridos graves', 'Óbitos'])
 
     def get_causa_acidentes(self):
         """
         Método para obter as principais causas de acidentes da tabela.
         """
-        return self.dados.groupby(by='causa_acidente').size()
+        tabela = self.dados.groupby(by='causa_acidente').size()
+        tabela = tabela.drop(['Outras'])
+        return tabela.sort_values()
 
     def filtrar_uf_go(self):
         """

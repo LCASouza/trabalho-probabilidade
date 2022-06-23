@@ -60,7 +60,7 @@ class Graphics:
         plt.tick_params(labelsize=layout.label_size)
         plt.show()
 
-    def mostrar_grafico_barras_dias_da_semana(self, dados: DataFrame):
+    def mostrar_grafico_dias_da_semana(self, dados: DataFrame):
         """
         Método para exibir um gráfico de barras.
 
@@ -78,7 +78,7 @@ class Graphics:
         plt.xlabel("Dias da semana", fontsize=12)
         plt.show()
 
-    def mostrar_grafico_barras_acidentes(self, dados: DataFrame):
+    def mostrar_grafico_causas_acidentes(self, dados: DataFrame):
         """
         Método para exibir um gráfico de barras.
 
@@ -88,7 +88,7 @@ class Graphics:
         """
         parameters = {'xtick.labelsize': 8,
                       'ytick.labelsize': 10,
-                      'figure.figsize': (10, 6)}
+                      'figure.figsize': (8, 6)}
         plt.rcParams.update(parameters)
 
         legenda = list()
@@ -119,9 +119,10 @@ class Graphics:
         dados.plot.bar(rot=0, color='#06471F')
         plt.title("Vítimas dos acidentes nas rodovias federais (GO)", fontsize=15)
         plt.ylabel("Quantidade", fontsize=12)
+        plt.xlabel("Gravidade", fontsize=12)
         plt.show()
 
-    def mostrar_grafico_causas_acidentes_severidade(self, dados: DataFrame):
+    def mostrar_grafico_causas_acidentes_gravidade(self, dados: DataFrame):
         """
         Método para exibir um gráfico de barras multiplas.
 
@@ -129,15 +130,12 @@ class Graphics:
             DataFrame dados:
             contém os dados que serão utilizados no gráfico.
         """
-        parameters = {'xtick.labelsize': 8,
-                      'ytick.labelsize': 13,
-                      'figure.figsize': (15, 9)}
-        scale = [100,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000]
+        scale = [100, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000]
         legenda = list()
         causas = list()
         causasFormatado = list()
         for estadoSaude, tabelaEstadoSaude in dados.iteritems():
-            legenda.append(estadoSaude.title())
+            legenda.append(str(estadoSaude).title())
             causas = tabelaEstadoSaude.keys()
         for causa in causas:
             causa = re.sub(r"(\w\s\w+)(\s)", r"\1\n", causa)
@@ -145,15 +143,15 @@ class Graphics:
             causa = re.sub(r"([^ \n]{8}) ([^ \n]{8})", r"\1\n\2", causa)
             causasFormatado.append(causa)
         dados.index = causasFormatado
-        dados.plot(kind="bar", rot=0, figsize=(14, 7))
+        dados.plot(kind="bar", rot=0, figsize=(12, 7))
         plt.xlabel('Causas')
         plt.ylabel('Frequência')
-        plt.title('Gráfico Causas de acidentes X Gravidade Vítimas')
+        plt.title('Causas de acidentes por gravidade das vítimas')
         plt.legend(legenda)
         plt.yticks(scale)
         plt.show()
 
-    def mostrar_grafico_barras_tipo_acidente(self, dados: DataFrame):
+    def mostrar_grafico_tipo_acidente(self, dados: DataFrame):
         """
         Método para exibir um gráfico de barras.
 
@@ -171,20 +169,20 @@ class Graphics:
         plt.subplots(figsize=(10, 7))
         for tipoAcidente, frequencia in dados.iteritems():
             plt.bar(letra, frequencia)
-            legenda.append(letra + ' - ' + tipoAcidente)
+            legenda.append(letra + ' - ' + str(tipoAcidente))
             letra = chr(ord(letra) + 1)
         plt.xlabel('Tipos')
         plt.ylabel('Frequência')
-        plt.title('Gráfico tipos de acidentes')
+        plt.title('Tipos de acidentes nas rodovias federais (GO)')
         plt.legend(legenda)
         plt.show()
 
     def mostrar_grafico_rodovias_acidentes(self, dados: DataFrame):
-        plt.subplots(figsize=(10, 7))
+        plt.subplots(figsize=(9, 7))
         for br, frequencia in dados.iteritems():
             s = 'BR-' + br
             plt.bar(s, frequencia)
         plt.xlabel('Rodovias federais no estado de Goiás')
         plt.ylabel('Frequência')
-        plt.title('Gráfico tipos de acidentes')
+        plt.title('Frequência de acidentes nas rodovias federais (GO)')
         plt.show()
