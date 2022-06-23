@@ -14,10 +14,16 @@ if __name__ == '__main__':
     tabela = DataProcessing("arquivos/tabela_acidentes.csv")
     graficos = Graphics()
 
+
     graficos.mostrar_grafico_barras_dias_da_semana(tabela.get_dia_semana())
 
     graficos.mostrar_grafico_barras_acidentes(tabela.get_causa_acidentes())
 
     graficos.mostrar_grafico_vitimas_acidentes(tabela.get_vitimas_acidentes())
 
-    graficos.mostrar_grafico_causas_acidentes_vitimas(tabela.get_causas_acidentes_sum_vitimas())
+    graficos.mostrar_grafico_barras_tipo_acidente(tabela.get_tipo_acidente())
+
+    graficos.mostrar_grafico_causas_acidentes_severidade(tabela.get_causas_acidentes_sum_vitimas())
+
+    graficos.mostrar_grafico_rodovias_acidentes(tabela.get_rodovia_adicentes())
+

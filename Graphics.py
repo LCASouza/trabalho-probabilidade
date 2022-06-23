@@ -10,7 +10,8 @@
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 from Layout import Layout
-
+import re
+import numpy as np
 
 class Graphics:
 
@@ -90,12 +91,12 @@ class Graphics:
                       'figure.figsize': (10, 6)}
         plt.rcParams.update(parameters)
 
-        alfabeto = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
-        legenda = []
+        legenda = list()
+        letra = 'A'
         for causa_acidente, frequencia in dados.iteritems():
-            letra = alfabeto.pop(0)
             plt.bar(letra, frequencia)
             legenda.append(letra + ' - ' + str(causa_acidente))
+            letra = chr(ord(letra) + 1)
 
         plt.xlabel('Causas', fontsize=12)
         plt.ylabel('Ocorrências', fontsize=12)
@@ -120,7 +121,7 @@ class Graphics:
         plt.ylabel("Quantidade", fontsize=12)
         plt.show()
 
-    def mostrar_grafico_causas_acidentes_vitimas(self, dados: DataFrame):
+    def mostrar_grafico_causas_acidentes_severidade(self, dados: DataFrame):
         """
         Método para exibir um gráfico de barras multiplas.
 
@@ -131,10 +132,59 @@ class Graphics:
         parameters = {'xtick.labelsize': 8,
                       'ytick.labelsize': 13,
                       'figure.figsize': (15, 9)}
+        scale = [100,500,1000,1500,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000]
+        legenda = list()
+        causas = list()
+        causasFormatado = list()
+        for estadoSaude, tabelaEstadoSaude in dados.iteritems():
+            legenda.append(estadoSaude.title())
+            causas = tabelaEstadoSaude.keys()
+        for causa in causas:
+            causa = re.sub(r"(\w\s\w+)(\s)", r"\1\n", causa)
+            causa = re.sub(r"( .+)( )(\w{4})", r"\1\n\3", causa)
+            causa = re.sub(r"([^ \n]{8}) ([^ \n]{8})", r"\1\n\2", causa)
+            causasFormatado.append(causa)
+        dados.index = causasFormatado
+        dados.plot(kind="bar", rot=0, figsize=(14, 7))
+        plt.xlabel('Causas')
+        plt.ylabel('Frequência')
+        plt.title('Gráfico Causas de acidentes X Gravidade Vítimas')
+        plt.legend(legenda)
+        plt.yticks(scale)
+        plt.show()
+
+    def mostrar_grafico_barras_tipo_acidente(self, dados: DataFrame):
+        """
+        Método para exibir um gráfico de barras.
+
+        Recebe como parâmetro:
+            DataFrame dados:
+            contém os dados que serão utilizados no gráfico.
+        """
+        parameters = {'xtick.labelsize': 8,
+                      'ytick.labelsize': 10,
+                      'figure.figsize': (10, 6)}
         plt.rcParams.update(parameters)
-        dados.plot.bar()
-        plt.title("Causas de acidentes X vítimas - rodovias federais (GO)", fontsize=20)
-        plt.ylabel("Ocorrências", fontsize=15)
-        plt.xlabel("Causas dos acidentes", fontsize=15)
-        plt.legend(fontsize=15)
+
+        legenda = list()
+        letra = 'A'
+        plt.subplots(figsize=(10, 7))
+        for tipoAcidente, frequencia in dados.iteritems():
+            plt.bar(letra, frequencia)
+            legenda.append(letra + ' - ' + tipoAcidente)
+            letra = chr(ord(letra) + 1)
+        plt.xlabel('Tipos')
+        plt.ylabel('Frequência')
+        plt.title('Gráfico tipos de acidentes')
+        plt.legend(legenda)
+        plt.show()
+
+    def mostrar_grafico_rodovias_acidentes(self, dados: DataFrame):
+        plt.subplots(figsize=(10, 7))
+        for br, frequencia in dados.iteritems():
+            s = 'BR-' + br
+            plt.bar(s, frequencia)
+        plt.xlabel('Rodovias federais no estado de Goiás')
+        plt.ylabel('Frequência')
+        plt.title('Gráfico tipos de acidentes')
         plt.show()

@@ -34,14 +34,23 @@ class DataProcessing:
         """
         return self.dados.groupby(by='dia_semana', sort=False).size()
 
+    def get_tipo_acidente(self):
+        """
+        Método para obter os tipos de acidentes.
+        """
+
+        return self.dados.groupby(by='tipo_acidente', sort=False).size()
+
     def get_causas_acidentes_sum_vitimas(self):
         """
         Método para filtrar as causas de acidentes e somar a quantidade de mortos, feridos, e ilesos
         em cada causa obtida.
         """
-        tabela_dados = self.dados.filter(['causa_acidente', 'mortos', 'feridos_graves', 'feridos_leves', 'ilesos'])
-        tabela_dados = tabela_dados.groupby(by='causa_acidente', sort=False).sum()
-        return tabela_dados
+        tabela = self.dados.groupby(by='causa_acidente').sum()
+        tabela = tabela[['ilesos', 'feridos', 'mortos']]
+        tabela = tabela.drop(["Outras"])
+
+        return tabela
 
     def get_vitimas_acidentes(self):
         """
@@ -76,3 +85,9 @@ class DataProcessing:
         """
         dados = pd.read_csv(arquivo, sep=";", low_memory=False)
         return dados
+
+    def get_rodovia_adicentes(self):
+        tabela = self.dados.groupby(by='br').size()
+        tabela = tabela.drop(['661','580','552','270','400','0'])
+        return tabela.sort_values()
+
